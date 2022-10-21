@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class AbstractFactory<T> : MonoBehaviour where T : MonoBehaviour
+public class GenericFactory<T> : MonoBehaviour where T : SpawnedObject
 {
     [SerializeField] private T _prefab;
     [SerializeField] private Transform _parentTransform;
@@ -20,5 +20,10 @@ public class AbstractFactory<T> : MonoBehaviour where T : MonoBehaviour
     public T GetObject()
     {
         return _objectPool.Get();
+    }
+    
+    public void ReleaseObject(T pooledObject)
+    {
+        _objectPool.Release(pooledObject);
     }
 }

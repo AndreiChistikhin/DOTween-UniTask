@@ -12,8 +12,8 @@ using UnityEngine.UI;
 //https://github.com/Cysharp/UniTask
 //https://cysharp.github.io/UniTask/api/Cysharp.Threading.Tasks.UnityAsyncExtensions.html
 //Преимущества над тасками:
-//UniTask структура, библиотека не алочит память
-//Делает все AsyncObject(UnityWebRequest...), Coroutines awaitable
+//UniTask структура, библиотека намного меньше алочит память
+//Делает все AsyncObject(UnityWebRequest...) и Coroutines awaitable
 //Нет тредов, можно запускать на Webgl, юзает PlayerLoop
 //Проще говоря, как написано в доке:
 //Task is too heavy and not matched to Unity threading (single-thread).
@@ -212,6 +212,13 @@ public class UniTaskMethods : MonoBehaviour
             await UniTask.Delay(TimeSpan.FromSeconds(3));
             Debug.Log("ForEachAwait, 3 seconds Queue");
         });
+    }
+    
+    public async UniTask<int> FooAsync()
+    {
+        await UniTask.Yield();
+        throw new OperationCanceledException(); //cancel behaviour in an async UniTask method, но лучше использовать SuppressCancellationThrow,
+        //т к вызов OperationCanceledException() весьма тяжелый 
     }
 
     //Unitask в одном треде - pPlayerLoop, перейти на другие треды - UniTask.RunOnThreadPool; UniTask.SwitchToThreadPool 

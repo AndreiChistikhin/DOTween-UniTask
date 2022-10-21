@@ -128,15 +128,16 @@ public class DOTweenMethods : MonoBehaviour
     //SetAs - задаем одинаковые параметры tween или TweenOarams
     //SetAutoKill - убиваем твин, как он доиграет
     //SetInverted - играет с конца в начало
-    //SetUpdate - устанавливаем тип update(fixed,late,normal)
+    //SetUpdate - устанавливаем тип update(fixed,late,normal), если isIndependentUpdate = true, игнорит timeScale
     //SetDelay - ставим задержку
     //SetSpeedBased - вместо времени твина ставим скорость
+    //From - ставит твин в заданную позицию и идет к первоначальной
     //Остальные set не так полезны
     private void TweenerSettings()
     {
         Tween tween=_objectsToMove[0].DOMoveX(0, 1);
         tween.timeScale = 0.5f;
-        _objectsToMove[0].DOMoveX(0, 1).SetAs(tween).SetAutoKill(true).SetDelay(1).SetSpeedBased(true);
+        _objectsToMove[0].DOMoveX(0, 1).SetAs(tween).SetAutoKill(true).SetDelay(1).SetSpeedBased(true).From();
     }
 
     //OnRewind - при вызове rewind или когда играет назад и дошел до начальной позиции

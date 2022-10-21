@@ -36,7 +36,7 @@ public class PlayerMovementUI : MonoBehaviour
                 if (_movementDictionary[button] == null)
                     return;
                 button.image.DOComplete();
-                button.image.DOColor(Color.red, 0.2f).SetLoops(2, LoopType.Yoyo);
+                button.image.DOColor(Color.red, 0.2f).SetLoops(2, LoopType.Yoyo).WithCancellation(this.GetCancellationTokenOnDestroy());
 
                 MovementButtonPressed?.Invoke(_movementDictionary[button]);
             });
